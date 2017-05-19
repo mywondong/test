@@ -28,5 +28,5 @@ public class MySQLConnTest {
 		
 	}
 	
-	/*여기는 테스트------*/
+	/*여기는 테스트------ㄹㄹ*/
 }
