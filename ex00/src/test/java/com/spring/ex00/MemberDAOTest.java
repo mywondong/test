@@ -27,7 +27,7 @@ public class MemberDAOTest {
 		vo.setUserid("user03");
 		vo.setUserpw("user03");
 		vo.setUsername("USER03");
-		vo.setEmail("user00@aaa.com");
+		vo.setEmail("user00@aaa.com"); 
 		
 		dao.insertMember(vo);
 	}	
