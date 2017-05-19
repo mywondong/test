@@ -27,4 +27,6 @@ public class MySQLConnTest {
 		}
 		
 	}
+	
+	/*여기는 테스트*/
 }
