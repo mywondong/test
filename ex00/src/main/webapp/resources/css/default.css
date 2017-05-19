@@ -1,0 +1,244 @@
+@charset "utf-8";
+
+/*------ 텍스트 드레그 막기 -----*/
+* {
+/*    -ms-user-select: none; 
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none; */
+}
+ 
+* {
+	-ms-touch-action: none;  /*------ ie10에서 이벤트포인터 버그해결 -----*/
+	box-sizing: border-box;
+}
+
+iframe {
+	border:0px;
+}
+
+html, body {
+	height:100%;
+}
+
+/* ========================================
+	reset
+======================================== */
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+pre, form, fieldset, input, textarea,
+p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th {
+	/* text-align: left; */
+}
+q:before, q:after {
+	content: '';
+}
+object, embed {
+	vertical-align: top;
+}
+hr,legend {
+	display: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size: 12px;
+	font-weight: normal;
+}
+abbr, acronym, fieldset {
+	border: 0;
+}
+li {
+	list-style-type: none;
+}
+em, strong {
+	font-style: normal;
+	font-weight: bold;
+}
+img {
+	border: 0;
+	vertical-align: bottom;
+}
+:focus {
+	outline: none;
+}
+a:link, a:visited {
+	outline: none;
+}
+a:hover, a:active {
+	outline: none;
+}
+
+/* ========================================
+	base
+======================================== */
+
+body {
+	/*background: #ffffff;*/
+	color: #333333;
+	font-size: 12px;
+ 	font-family:'돋움',Dotum,helvetica,arial,sans-serif; 
+	line-height: 1;
+}
+
+/* for IF6 */
+* html body {
+ 	font-family: '돋움',Dotum,helvetica,arial,sans-serif; 
+}
+
+input[type=text], [type=number], input[type=file], input[type=submit], textarea {
+ 	font-family: '돋움',Dotum,helvetica,arial,sans-serif; 
+}
+
+/* ========================================
+	CLEARFIX
+======================================== */
+
+/* clearfix : For modern browsers */
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+/* clearfix : For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom: 1;
+}
+
+/* ========================================
+	table init
+======================================== */
+
+/*텍스트 넘침 ...으로 표시되게*/
+table {
+	table-layout: fixed;
+	/* color:#000; */
+	width:100%;
+	font-size: inherit;
+}
+ table, th, td {
+	border: 1px solid #000;
+	border-collapse: collapse;
+	height:20px;
+}
+th, td {
+	padding: 8px;
+	vertical-align: middle;
+	
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+th {
+	font-weight: bold;
+}
+
+
+/* ========================================
+	button
+======================================== */
+
+/* button {
+	font-size: 12px;
+ 	font-family:'돋움',Dotum,helvetica,arial,sans-serif; 
+    padding: 0 12px 0 12px;
+    height:25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;	
+}
+
+.btn:active {
+	position: relative;
+	top:1px;
+} */
+
+/* ========================================
+	display css
+======================================== */
+
+._hide {
+	display: none;
+} 
+
+/* ========================================
+	float
+======================================== */
+
+._floatL {
+	float: left;
+}
+._floatR {
+	float: right;
+}
+
+/* ========================================
+	sort
+======================================== */
+._vsort:before {  
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}     
+
+/* ========================================
+	rem
+======================================== */
+
+/* @media (max-width:160px){html{font-size:5px;}}
+@media (min-width:161px) and (max-width:199px){html{font-size:6px;}}
+@media (min-width:200px) and (max-width:239px){html{font-size:7px;}}
+@media (min-width:240px) and (max-width:279px){html{font-size:8px;}}
+@media (min-width:280px) and (max-width:319px){html{font-size:9px;}}
+@media (min-width:320px) and (max-width:359px){html{font-size:10px;}}
+@media (min-width:360px) and (max-width:399px){html{font-size:11px;}}
+@media (min-width:400px) and (max-width:439px){html{font-size:12px;}}
+@media (min-width:440px) and (max-width:479px){html{font-size:13px;}}
+@media (min-width:480px) and (max-width:519px){html{font-size:14px;}}
+@media (min-width:520px) and (max-width:559px){html{font-size:15px;}}
+@media (min-width:560px) and (max-width:599px){html{font-size:16px;}}
+@media (min-width:600px) and (max-width:639px){html{font-size:17px;}}
+@media (min-width:640px) and (max-width:679px){html{font-size:18px;}}
+@media (min-width:680px) and (max-width:719px){html{font-size:19px;}}
+@media (min-width:720px) and (max-width:759px){html{font-size:20px;}}
+@media (min-width:760px) and (max-width:799px){html{font-size:21px;}}
+@media (min-width:800px) and (max-width:839px){html{font-size:22px;}}
+@media (min-width:840px) and (max-width:879px){html{font-size:23px;}}
+@media (min-width:880px){html{font-size:24px;}}    */
+
+
+/* ========================================
+	
+======================================== */
+	
+.not-kor {
+	ime-mode:disabled; /* 한글입력방지 */
+}
+
+input[readonly], input[readonly="readonly"], input[readonly]:focus, input[readonly="readonly"]:focus {
+    background-color: #f2f2f2;
+    border: 1px solid #d7d8d9 !important;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+
+
+
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.BoardMapper">
+
+ <insert id="create">
+ 	insert into tbl_board (title, content, writer) values(#{title},#{content}, #{writer})
+ </insert>
+
+ <select id="read" resultType="com.spring.vo.Board">
+	 select idx, title, content, writer, regdate, viewcnt
+	 from tbl_board
+	 where idx = #{idx}
+ </select>
+
+ <delete id="delete">
+ 	delete from tbl_board where idx = #{idx}
+ </delete>
+
+ <select id="listAll" resultType="com.spring.vo.Board">
+	 <![CDATA[
+	 select idx, title, content, writer, regdate, viewcnt
+	 from tbl_board
+	 where idx > 0 
+	 order by idx desc, regdate desc
+	 ]]>  
+ </select>
+
+ <update id="update">
+ 	update tbl_board 
+ 	set title =#{title}, content =#{content} 
+ 	where idx = #{idx}
+ </update>
+ 
+ 
+ 
+<select id="listPage" resultType="com.spring.vo.Board">
+ <![CDATA[
+ select 
+   idx, title, content, writer, regdate, viewcnt 
+ from 
+   tbl_board 
+ where idx > 0 
+ order by idx desc, regdate desc
+ limit #{page}, 10  /*LIMIT 시작점, 갯수*/
+ ]]>  
+</select>
+
+
+
+<select id="listCriteria" resultType="com.spring.vo.Board">
+ <![CDATA[
+ select 
+   idx, title, content, writer, regdate, viewcnt 
+ from 
+   tbl_board 
+ where idx > 0 
+ order by idx desc, regdate desc
+ limit #{pageStart}, #{perPageNum}   /*mybatis는 내부적으로 gettter를 호출한다.*/    /*LIMIT 시작점, 갯수*/  
+ ]]>  
+</select>
+
+<select id="countPaging" resultType="int"> /*전체게시물 갯수*/  
+ <![CDATA[
+ select count(idx) 
+ from tbl_board 
+ where idx > 0 
+ ]]>  
+</select> 
+
+
+
+
+
+
+
+<sql id="search">  
+	<if test="searchType != null">
+		<if test="searchType == 't'.toString()">
+			and title like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and writer like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and ( title like CONCAT('%', #{keyword}, '%') OR content like 
+			CONCAT('%', #{keyword}, '%'))
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and ( content like CONCAT('%', #{keyword}, '%') OR writer like 
+			CONCAT('%', #{keyword}, '%'))
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and ( title like CONCAT('%', #{keyword}, '%')
+			OR
+			content like CONCAT('%', #{keyword}, '%')
+			OR
+			writer like CONCAT('%', #{keyword}, '%'))
+		</if>
+	</if>
+</sql>
+
+<select id="listSearch" resultType="com.spring.vo.Board"> 
+	<![CDATA[  
+	  select * 
+	  from tbl_board 
+	  where idx > 0 
+	]]>
+	<include refid="search"></include>/*include*/ 
+	<![CDATA[    
+	  order by idx desc
+	  limit #{pageStart}, #{perPageNum}
+	]]>
+</select>
+
+
+<select id="listSearchCount" resultType="int">
+	<![CDATA[  
+	  select count(idx) 
+	  from tbl_board 
+	  where idx > 0 
+	]]>
+	<include refid="search"></include>/*include*/ 
+</select>
+ 
+</mapper>

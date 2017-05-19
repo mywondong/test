@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> -->
+<!-- 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test"/> -->
+		
+		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> --> <!-- log4jdbc -->
+		<!-- <property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/test"/> --> <!-- log4jdbc -->
+		
+		<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver" /> <!-- log4sql -->
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test"/> 	<!-- log4sql -->	
+		
+		<property name="username" value="root"/>
+		<property name="password" value="1234"/>
+	</bean>
+	
+	
+	
+	<!-- 데이터베이스와 연결과 sql실행에 대한 모든것을 가진 객체 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:/mappers/**/*mapper.xml"/> <!-- 등록된 xml파일들 -->
+	</bean>
+
+	<!-- 데이터 연결후 close(종료)하는 작업을 SqlSessionTemplate가 제공해준다. 또 트랜잭션관리, 쓰레드처리의 안정성을 보장해준다.-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />		
+	</bean>
+	
+	
+	
+
+<!-- 	<context:component-scan base-package="com.spring.test" />
+	<context:component-scan base-package="com.spring.controller" />
+	<context:component-scan base-package="com.spring.service" />
+	<context:component-scan base-package="com.spring.dao" /> 
+	<context:component-scan base-package="com.spring.*" />	-->
+	
+</beans>
