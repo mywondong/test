@@ -4,14 +4,14 @@
 </head>
 <body>
     <ul>
-    	<li>s1--</li>
-    	<li>s2--</li>
-    	<li>s3--</li>
-    	<li>s4--</li>
-    	<li>s5--</li>
-    	<li>s6--</li>
-    	<li>s7--</li>
-    	<li>s8--</li>
+    	<li>s1</li>
+    	<li>s2</li>
+    	<li>s3</li>
+    	<li>s4</li>
+    	<li>s5</li>
+    	<li>s6</li>
+    	<li>s7</li>
+    	<li>s8</li>
     </ul>
 </body>
 </html>
