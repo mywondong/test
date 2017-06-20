@@ -12,7 +12,6 @@
     	<li>s6--</li>
     	<li>s7--</li>
     	<li>s8--</li>
-    	<li>s8--</li>
     </ul>
 </body>
 </html>
